@@ -1,0 +1,163 @@
+programa {
+  inclua biblioteca Util --> u
+funcao inicio() {
+
+
+cadeia acao
+cadeia titulo[5]
+cadeia busca[5]
+cadeia genero[5]
+cadeia ano[5]
+logico disponibilidade[5]={verdadeiro, verdadeiro, verdadeiro, verdadeiro,verdadeiro}
+inteiro aux = 0
+logico repetir
+
+
+    faca {
+    limpa()
+            escreva("olá, qual opção você escolhe em nossa locadora:\n")
+            escreva("1 - Cadastrar filmes\n2 - Alugar filme\n3 - Buscar filme\n4 - Relatorio\n5 - excluir \n6 - Devolução\n")
+            leia(acao)
+
+
+      escolha(acao) {
+          caso "1":
+            escreva("Digite o filme que deseja cadastrar:\n")
+            escreva("Digite o titulo do filme\n")
+            leia(titulo[aux])
+            escreva("Digite o genero do filme\n")
+            leia(genero[aux])
+            escreva("Digite o ano do filme\n")
+            leia(ano[aux])
+            aux++
+          pare
+          caso "2":
+            cadeia pesquisa = ""
+            escreva("Digite qual filme deseja alugar:\n")
+            leia(pesquisa)
+            para(inteiro i = 0 ; i < 5; i++){
+              se(pesquisa == titulo[i]  e disponibilidade[i] == verdadeiro) {
+                escreva("Filme alugado com sucesso\n " )
+                disponibilidade[i] = falso
+              pare
+              }senao
+              se (pesquisa == titulo[i] e disponibilidade[i] == falso ){
+                escreva("O Filme já está alugado \n")
+              }
+            }      
+          pare
+          caso "3":
+            escreva("Digite o filme que deseja buscar: \n")
+            leia(busca)
+            para(inteiro i=0;i<5;i++){
+              se(busca == titulo[i] ou busca == genero[i]){              
+                escreva("\n Titulo: ", titulo[i],"\n Gereno: ", genero[i],"\n Ano: ", ano[i], "\n Disponibilidade: ", disponibilidade[i], "\n")
+              }
+            }
+          pare
+          caso "4":
+            para(inteiro i=0;i<5;i++){
+              escreva("\n Titulo: ", titulo[i],"\n Gereno: ", genero[i],"\n Ano: ", ano[i], "\n Disponibilidade: ", disponibilidade[i], "\n")
+            }
+          pare
+          caso "5":
+          cadeia ex = ""
+            escreva("Digite o nome do filme que deseja excluir\n")
+            leia(ex)
+            para(inteiro i = 0; i < 5; i++){
+              se(ex == titulo[i] e disponibilidade[i] == verdadeiro){
+                titulo[i] = ""
+                genero[i] = ""
+                ano[i] = ""
+                escreva("Titulo excluido com sucesso!\n")
+                aux--
+              } senao
+              se (ex == titulo[i] e disponibilidade[i] == falso) {
+                escreva("O filme nao pode ser excluido, pois esta alugado\n")
+                pare
+
+
+              }              
+            }
+
+
+            logico controleExclusao = falso
+
+
+            para(inteiro i = 0; i < 5; i++){
+              se(titulo[i] == "" e disponibilidade[i] == verdadeiro){
+                controleExclusao = verdadeiro
+              }
+
+
+              se (controleExclusao) {
+                se (i < u.numero_elementos(titulo)-1) {
+                  titulo[i] = titulo[i + 1]
+                  genero[i] = genero[i + 1]
+                  ano[i] = ano[i + 1]
+                }  
+              }
+                         
+            }
+
+
+
+
+          pare
+          caso "6":
+        cadeia devo
+          escreva("Digite o nome do filme que deseja devolver\n")
+          leia(devo)
+            para(inteiro i = 0; i < 5; i++){
+              se (devo == titulo[i] e disponibilidade[i] == falso){
+              disponibilidade[i] = verdadeiro
+              escreva("Obrigado por devolver o filme ", titulo[i], "\n")
+            }senao
+              se (devo == titulo[i] e disponibilidade[i] == verdadeiro) {
+                escreva("O filme não está alugado\n")
+                pare
+
+
+              }    
+            }
+          pare
+      }  
+
+
+      escreva ("\ndeseja realizar outra operação? \n")
+      leia (repetir)
+
+
+    }enquanto (repetir == verdadeiro)
+            escreva ("muito obrigado! \n")
+  }
+}
+
+
+              se (controleExclusao) {
+                escreva(i < u.numero_elementos(titulo)-1)
+                se (i < u.numero_elementos(titulo)-1) {
+                  escreva(i+1)
+                  titulo[i] = titulo[i + 1]
+                  genero[i] = genero[i + 1]
+                  ano[i] = ano[i + 1]
+                }  
+              }
+                         
+            }
+
+
+
+
+          pare
+      }  
+
+
+      escreva ("\ndeseja realizar outra operação? \n")
+      leia (repetir)
+
+
+    }enquanto (repetir == verdadeiro)
+            escreva ("muito obrigado! \n")
+  }
+}
